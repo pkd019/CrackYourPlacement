@@ -1,0 +1,40 @@
+class Solution {
+  public:
+    // Function to return Breadth First Traversal of given graph.
+     void bfs(unordered_map<int,vector<int>> &mp,int u, vector<int> &result,
+             vector<bool> &visited){
+                 queue<int> que;
+                 que.push(u);
+                 visited[u]=true;
+                 result.push_back(u);
+                 while(!que.empty()){
+                     int u = que.front();
+                     que.pop();
+                     for( auto &v: mp[u] ){
+                         if(!visited[v]){
+                             visited[v]=true;
+                             result.push_back(v);
+                             que.push(v);
+                             
+                         }
+                     }
+                 }
+
+        
+    }       
+    vector<int> bfsOfGraph(int V, vector<int> adj[]) {
+         unordered_map<int,vector<int>> mp;
+        for(int  u = 0 ;u<V; u++){
+             for(auto v = adj[u].begin();v!=adj[u].end();v++){
+                   mp[u].push_back(*v);
+             }
+        
+    }
+             vector<int> result;
+             vector<bool> visited(V,false);
+             bfs(mp,0,result,visited);
+             return result;
+        
+        // Code here
+    }
+};
